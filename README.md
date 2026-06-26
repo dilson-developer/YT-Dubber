@@ -1,5 +1,24 @@
 # 🎥 YT DUBBER CLI
 
+██╗   ██╗████████╗    ██████╗ ██╗   ██╗██████╗ ██████╗ ███████╗██████╗
+ ╚██╗ ██╔╝╚══██╔══╝    ██╔══██╗██║   ██║██╔══██╗██╔══██╗██╔════╝██╔══██╗
+  ╚████╔╝    ██║       ██║  ██║██║   ██║██████╔╝██████╔╝█████╗  ██████╔╝
+   ...
+
+   ◈  Dubla qualquer vídeo do YouTube para qualquer língua  ◈
+
+───────────── ▸ Built with Python · Hackathon 2026 ─────────────
+
+╭──────────── ◈  CONFIGURAÇÃO DO JOB  ◈ ───────────╮
+│  ▸ URL         https://youtube.com/watch?v=...    │
+│  ▸ Início      0:30                               │
+│  ▸ Língua      Português [PT]                     │
+╰───────────────────────────────────────────────────╯
+
+ ✔ DOWNLOAD ▸ ◉ EXTRACT ▸ ○ TRANSCRIBE ▸ ○ TRANSLATE ▸ ○ MIX
+  ETAPA 02/6  EXTRACT · via ffmpeg
+  [████████████████████] 100%  0:00:01
+
 Um tradutor e dobrador automático de vídeos do YouTube em linha de comando, desenvolvido em Python para o Hackathon "Built with Python".
 
 ## 🚀 Como Funciona
