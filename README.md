@@ -1,78 +1,94 @@
 # 🎥 YT DUBBER CLI
 
-Um tradutor e dobrador automático de vídeos do YouTube em linha de comando, desenvolvido em Python para o Hackathon "Built with Python".
+A command-line tool for automatically translating and dubbing YouTube videos, developed in Python for the “Built with Python” Hackathon.
 
-## 🚀 Como Funciona
-1. **Download & Corte:** Descarrega o vídeo e extrai o trecho selecionado usando `yt-dlp` e `FFmpeg`.
-2. **Transcrição:** Processa o áudio original com a biblioteca `Whisper`.
-3. **Tradução:** Traduz o texto com contexto técnico usando a API da `Groq` (Llama 3.1).
-4. **Síntese de Voz:** Gera a nova dobragem em português com o `Edge-TTS`.
-5. **Mixagem:** Junta o vídeo original com a nova voz sintetizada usando o `FFmpeg`.
+## 🚀 How It Works
+1. **Download & Cut:** Downloads the video and extracts the selected segment using `yt-dlp` and `FFmpeg`.
+2. **Transcription:** Processes the original audio using the `Whisper` library.
+3. **Translation:** Translates the text with technical context using the `Groq` API (Llama 3.1).
+4. **Text-to-Speech:** Generates the new dubbing in Portuguese using `Edge-TTS`.
+5. **Mixing:** Combines the original video with the new synthesized voice using `FFmpeg`.
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Technologies Used
 - Python
-- Typer (Interface de Linha de Comando)
-- Rich (Design do Terminal)
+- Typer (Command-Line Interface)
+- Rich (Terminal Design)
 - Groq API (Llama 3.1)
 - Whisper & Edge-TTS
 - FFmpeg
 
-## 💻 Como Executar
+## 💻 Step-by-Step User Guide
 
-## 💻 Guia de Uso Passo a Passo
+Follow the instructions below to set up the environment and run the tool correctly on your system.
 
-Siga as instruções abaixo para configurar o ambiente e executar a ferramenta corretamente no seu sistema.
-
-### ⚠️ Aviso Prévio Importante (Apenas para utilizadores Windows)
-Por padrão, o Windows bloqueia a execução de scripts no PowerShell. Se esta for a primeira vez que executa scripts no seu sistema, abra o PowerShell como **Administrador** e execute o seguinte comando para permitir a ativação de ambientes virtuais:
+### ⚠️ Important Notice (For Windows users only)
+By default, Windows blocks the execution of scripts in PowerShell. If this is the first time you’re running scripts on your system, open PowerShell as **Administrator** and run the following command to enable virtual environments:
 ```powershell
 
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-Pode digitar Y (ou S) quando o sistema solicitar a confirmação.
+You can type Y (or S) when the system prompts you for confirmation.
 
-1️⃣ Ativar o Ambiente Virtual (venv)
+1️⃣ Activate the Virtual Environment (venv)
 
-Antes de rodar a ferramenta, precisa de ativar o ambiente isolado onde todas as dependências estão instaladas.
+Before running the tool, you need to activate the isolated environment where all dependencies are installed.
 
-Caso abra o terminal como Administrador e apareça a pasta System32, execute primeiro:
+If you open the terminal as Administrator and the System32 folder appears, first run:
 
 cd $HOME
 
-De seguida, navegue até à pasta do projeto e ative o ambiente:
+Next, navigate to the project folder and activate the environment:
 
 cd C:\Users\cucaz\YT-Dubber
 .\venv\Scripts\Activate.ps1
 
-💡 Como saber se funcionou? Verá o prefixo (venv) aparecer logo no início da linha de comandos do seu terminal.
+💡 How do you know if it worked? You’ll see the (venv) prefix appear right at the beginning of your terminal’s command line.
 
-2️⃣ Instalar as Dependências do Projeto
-Com o ambiente virtual (venv) devidamente ativo, execute o comando abaixo para instalar todas as bibliotecas necessárias do requirements.txt:
+2️⃣ Install Project Dependencies
+With the virtual environment (venv) properly active, run the command below to install all the necessary libraries from requirements.txt:
 
 PowerShell
 
 pip install -r requirements.txt
-3️⃣ Como Executar a CLI
-A ferramenta funciona de forma totalmente flexível através de argumentos passados diretamente no terminal. O comando básico segue a seguinte estrutura:
+3️⃣ How to Run the CLI
+The tool works in a completely flexible way using arguments passed directly in the terminal. The basic command follows this structure:
 
 PowerShell
 
-python -m ytdubber.cli "URL_DO_VIDEO" --start SEGUNDO_INICIAL --end SEGUNDO_FINAL
-🚀 Exemplo Prático de Teste:
-Para processar um vídeo do segundo 10 até ao segundo 40, execute:
+python -m ytdubber.cli “VIDEO_URL” --start START_SECOND --end END_SECOND
+🚀 Practical Test Example:
+To process a video from second 10 to second 40, run:
 
 PowerShell
 
-python -m ytdubber.cli "[https://www.youtube.com/watch?v=xy-huFH5Ua4](https://www.youtube.com/watch?v=xy-huFH5Ua4)" --start 10 --end 40 --lang pt
+python -m ytdubber.cli “[https://www.youtube.com/watch?v=xy-huFH5Ua4](https://www.youtube.com/watch?v=xy-huFH5Ua4)” --start 10 --end 40 --lang pt
 
-🛑 Cuidados Importantes ao Usar (O que NÃO fazer)Para garantir que o pipeline rode sem interrupções, preste atenção aos seguintes limites do sistema:
+YT DUBBER CLI is designed to be a global accessibility tool, offering full support for 15 languages for transcription, translation, and text-to-speech. The pipeline is set up to process:
 
-⏱️ Ordem dos Tempos (--start e --end): O tempo inicial (--start) tem de ser obrigatoriamente menor que o tempo final (--end). Por exemplo, pedir para começar no segundo 30 e terminar no 10 vai travar o sistema e gerar um erro imediato na CLI.
+Portuguese (Brazil)
+Portuguese (Portugal)
+English
+Spanish
+French
+German
+Italian
+Dutch
+Russian
+Chinese (Mandarin)
+Japanese
+Korean
+Arabic
+Hindi
+Turkish
 
-⏳ Limite de Duração do Vídeo: Como esta ferramenta faz chamadas a APIs externas (Groq e Edge-TTS), evite processar trechos muito longos de uma só vez (ex: vídeos de 1 hora). Para testes rápidos e melhor performance no Hackathon, utilize cortes de 30 a 60 segundos.
+🛑 Important Precautions When Using (What NOT to Do) To ensure the pipeline runs without interruptions, pay attention to the following system limits:
 
-🔗 Formato da URL: Certifique-se de passar a URL completa do YouTube entre aspas " ", garantindo que o terminal não interprete caracteres especiais do link de forma errada.
+⏱️ Time Order (--start and --end): The start time (--start) must be earlier than the end time (--end). For example, specifying a start time of 30 seconds and an end time of 10 seconds will cause the system to crash and generate an immediate error in the CLI.
 
-📁 Ficheiros Bloqueados: O sistema possui um mecanismo de limpeza automática que apaga os ficheiros temporários do teste anterior antes de começar um novo. Certifique-se de que não tem nenhum player de vídeo (ou o próprio Windows Media Player) aberto a reproduzir o vídeo gerado anteriormente, caso contrário o sistema não conseguirá apagá-lo e dará erro de "Acesso Negado".
+⏳ Video Duration Limit: Since this tool makes calls to external APIs (Groq and Edge-TTS), avoid processing very long clips at once (e.g., 1-hour videos). For quick testing and better performance during the Hackathon, use clips ranging from 30 to 60 seconds.
+
+🔗 URL Format: Be sure to pass the complete YouTube URL enclosed in quotation marks “ ”, ensuring that the terminal does not misinterpret special characters in the link.
+
+📁 Blocked Files: The system has an automatic cleanup mechanism that deletes temporary files from the previous test before starting a new one. Make sure you don’t have any video players (or Windows Media Player itself) open and playing the previously generated video; otherwise, the system won’t be able to delete it and will return an “Access Denied” error.
 
 ---
