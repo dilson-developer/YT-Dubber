@@ -39,7 +39,7 @@ cd $HOME
 
 Next, navigate to the project folder and activate the environment:
 
-cd C:\Users\cucaz\YT-Dubber
+cd C:\SeuProjeto\YT-Dubber
 .\venv\Scripts\Activate.ps1
 
 💡 How do you know if it worked? You’ll see the (venv) prefix appear right at the beginning of your terminal’s command line.
@@ -61,7 +61,7 @@ To process a video from second 10 to second 40, run:
 
 PowerShell
 
-python -m ytdubber.cli “[https://www.youtube.com/watch?v=xy-huFH5Ua4](https://www.youtube.com/watch?v=xy-huFH5Ua4)” --start 10 --end 40 --lang pt
+python -m ytdubber.cli “https://www.youtube.com/watch?v=xy-huFH5Ua4” --start 10 --end 40 --lang pt
 
 YT DUBBER CLI is designed to be a global accessibility tool, offering full support for 15 languages for transcription, translation, and text-to-speech. The pipeline is set up to process:
 
