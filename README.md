@@ -1,96 +1,88 @@
 # 🎥 YT DUBBER CLI v1.1.0
 
-**Improved version** with important fixes and an enhanced visual interface.
+**Uma ferramenta CLI em Python para traduzir e dublar trechos de vídeos do YouTube de forma automática.**
 
-A command-line tool for automatically translating and dubbing YouTube videos, developed in Python for the “Built with Python” Hackathon.
-
-## 🚀 How It Works
-1. **Download & Cut:** Downloads the video and extracts the selected segment using `yt-dlp` and `FFmpeg`.
-2. **Transcription:** Processes the original audio using the `Whisper` library.
-3. **Translation:** Translates the text with technical context using the `Groq` API (Llama 3.1).
-4. **Text-to-Speech:** Generates the new dubbing in Portuguese using `Edge-TTS`.
-5. **Mixing:** Combines the original video with the new synthesized voice using `FFmpeg`.
-
-## 🛠️ Technologies Used
-- Python
-- Typer (Command-Line Interface)
-- Rich (Terminal Design)
-- Groq API (Llama 3.1)
-- Whisper & Edge-TTS
-- FFmpeg
-
-## 💻 Step-by-Step User Guide
-
-Follow the instructions below to set up the environment and run the tool correctly on your system.
-
-### ⚠️ Important Notice (For Windows users only)
-By default, Windows blocks the execution of scripts in PowerShell. If this is the first time you’re running scripts on your system, open PowerShell as **Administrator** and run the following command to enable virtual environments:
-```powershell
-
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-
-You can type Y (or S) when the system prompts you for confirmation.
-
-1️⃣ Activate the Virtual Environment (venv)
-
-Before running the tool, you need to activate the isolated environment where all dependencies are installed.
-
-If you open the terminal as Administrator and the System32 folder appears, first run:
-
-cd $HOME
-
-Next, navigate to the project folder and activate the environment:
-
-cd C:\SeuProjeto\YT-Dubber
-.\venv\Scripts\Activate.ps1
-
-💡 How do you know if it worked? You’ll see the (venv) prefix appear right at the beginning of your terminal’s command line.
-
-2️⃣ Install Project Dependencies
-With the virtual environment (venv) properly active, run the command below to install all the necessary libraries from requirements.txt:
-
-PowerShell
-
-pip install -r requirements.txt
-3️⃣ How to Run the CLI
-The tool works in a completely flexible way using arguments passed directly in the terminal. The basic command follows this structure:
-
-PowerShell
-
-python -m ytdubber.cli “VIDEO_URL” --start START_SECOND --end END_SECOND
-🚀 Practical Test Example:
-To process a video from second 10 to second 40, run:
-
-PowerShell
-
-python -m ytdubber.cli “https://www.youtube.com/watch?v=xy-huFH5Ua4” --start 10 --end 40 --lang pt
-
-YT DUBBER CLI is designed to be a global accessibility tool, offering full support for 15 languages for transcription, translation, and text-to-speech. The pipeline is set up to process:
-
-Portuguese (Brazil)
-Portuguese (Portugal)
-English
-Spanish
-French
-German
-Italian
-Dutch
-Russian
-Chinese (Mandarin)
-Japanese
-Korean
-Arabic
-Hindi
-Turkish
-
-🛑 Important Precautions When Using (What NOT to Do) To ensure the pipeline runs without interruptions, pay attention to the following system limits:
-
-⏱️ Time Order (--start and --end): The start time (--start) must be earlier than the end time (--end). For example, specifying a start time of 30 seconds and an end time of 10 seconds will cause the system to crash and generate an immediate error in the CLI.
-
-⏳ Video Duration Limit: Since this tool makes calls to external APIs (Groq and Edge-TTS), avoid processing very long clips at once (e.g., 1-hour videos). For quick testing and better performance during the Hackathon, use clips ranging from 30 to 60 seconds.
-
-🔗 URL Format: Be sure to pass the complete YouTube URL enclosed in quotation marks “ ”, ensuring that the terminal does not misinterpret special characters in the link.
-
-📁 Blocked Files: The system has an automatic cleanup mechanism that deletes temporary files from the previous test before starting a new one. Make sure you don’t have any video players (or Windows Media Player itself) open and playing the previously generated video; otherwise, the system won’t be able to delete it and will return an “Access Denied” error.
+Versão melhorada com **interface visual aprimorada**, correção de bugs importantes e melhor organização do projeto.
 
 ---
+
+## 🚀 O que há de novo na v1.1.0
+
+- Interface visual muito mais bonita e profissional (com pipeline steps e comparação de texto lado a lado)
+- **Correção crítica** no corte de vídeo com FFmpeg (agora o tempo final está correto)
+- Adicionado suporte a arquivo `.env` para configuração de API
+- Melhor organização de arquivos temporários
+- README e documentação atualizados
+
+---
+
+## 🛠️ Como Funciona
+
+1. **Download & Corte** — Baixa o vídeo e extrai o trecho selecionado usando `yt-dlp` + `FFmpeg`
+2. **Transcrição** — Transcreve o áudio com `Whisper` (modelo base)
+3. **Tradução** — Traduz o texto usando a API da **Groq** (Llama 3.1)
+4. **Text-to-Speech** — Gera a voz dublada com `Edge-TTS`
+5. **Mixagem** — Combina o vídeo original com a nova voz usando `FFmpeg`
+
+---
+
+## 🧰 Tecnologias Utilizadas
+
+- Python + Typer + Rich
+- yt-dlp + FFmpeg
+- OpenAI Whisper
+- Groq API (Llama 3.1)
+- Edge-TTS
+
+---
+
+## 📦 Instalação e Configuração
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/dilson-developer/YT-Dubber.git
+cd YT-Dubber
+
+2. Crie o ambiente virtual
+Bashpython -m venv venv
+
+3. Ative o ambiente virtual
+Windows:
+PowerShell.\venv\Scripts\Activate.ps1
+Linux / Mac:
+Bashsource venv/bin/activate
+
+4. Instale as dependências
+Bashpip install -r requirements.txt
+
+5. Configure a chave da Groq (obrigatório)
+Crie um arquivo chamado .env na raiz do projeto e coloque sua chave:
+envGROQ_API_KEY=sua_chave_da_groq_aqui
+Dica: Copie o arquivo .env.example e renomeie para .env
+
+▶️ Como Usar
+Bashpython -m ytdubber.cli "URL_DO_YOUTUBE" --start SEGUNDO_INICIAL --end SEGUNDO_FINAL --lang pt
+
+Exemplo prático:
+Bashpython -m ytdubber.cli "https://www.youtube.com/watch?v=xy-huFH5Ua4" --start 10 --end 40 --lang pt
+
+🌍 Idiomas Suportados
+O projeto suporta 15 idiomas para transcrição, tradução e dublagem:
+pt, en, es, fr, de, it, ja, zh, ar, ru, ko, hi, nl, pl, tr
+
+⚠️ Cuidados Importantes
+
+O --start deve ser menor que o --end
+Use trechos curtos (30 a 60 segundos) para testes
+Coloque a URL entre aspas " "
+Feche qualquer player de vídeo antes de rodar (pode dar erro de acesso negado)
+
+
+📜 Changelog
+Veja todas as mudanças da versão: CHANGELOG.md
+
+📄 Licença
+Este projeto foi desenvolvido para fins educacionais e de hackathon.
+
+Desenvolvido por @dilson-developer
