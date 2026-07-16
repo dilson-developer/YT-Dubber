@@ -1,4 +1,6 @@
-# 🎥 YT DUBBER CLI
+# 🎥 YT DUBBER CLI v1.1.0
+
+**Improved version** with important fixes and an enhanced visual interface.
 
 A command-line tool for automatically translating and dubbing YouTube videos, developed in Python for the “Built with Python” Hackathon.
 
